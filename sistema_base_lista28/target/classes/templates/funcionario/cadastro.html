@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						Cadastrar Funcionario
+					</li>
+				</ul>
+				<a class="btn btn-primary btn-md" href="/funcionarios/listar">
+					<span class="oi oi-spreadsheet"></span>
+					Listar Funcionarios
+				</a>
+			</div>
+		</nav>
+	
+		<div class="container-fluid" id="cadastro">
+			<h1 class="h5 fw-bold mt-2">Formulário de Cadastro dos Funcionarios</h1>
+			
+			<hr>
+			
+			<form action="#" th:action="${funcionarioDTO.id == null} ? @{/funcionarioDTO/salvar} : @{/funcionarioDTO/editar}" th:object="${funcionarioDTO}" method="POST" anctype="multipart/form-data">
+				
+				<div class="row g-2 p-2 mb-3">
+				
+				<div class="row g-2 p-2 mb-3">
+					<div class="form-floating">
+						<input type="text" class="form-control pb-2" id="nome" th:field="*{nome}" required autofocus="autofocus" placeholder="Entre com o nome do funcionario">
+						<label for="nome" class="pt-2 ps-4">Nome</label>
+					</div>
+					
+					<div class="form-floating">
+						<input type="text" class="form-control pb-2" id="endereco" th:field="*{endereco}" required placeholder="Entre com o endereço do funcionario">
+						<label for="endereco" class="pt-2 ps-4">Endereço</label>
+					</div>
+					
+					<div class="form-floating">
+						<input type="number" class="form-control pb-2" id="numDep" th:field="*{numDep}" required placeholder="Entre com o numero de dependentes">
+						<label for="numDep" class="pt-2 ps-4">Numero Dependentes</label>
+					</div>
+				</div>
+				
+				<input type="hidden" id="id" th:field="*{id}">
+				<input type="submit" class="btn btn-primary" th:value="${funcionarioDTO.id == null} ? 'Incluir' : 'Salvar'">
+				<input type="button" class="btn btn-danger" value="Cancelar" th:onclick="window.location=[[@{/funcionarios/listar}]];">
+			</form>
+		</div>
+	</section>
+</body>
+</html>
